@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Users Management</h3>
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search users...">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="label" ng-class="{'label-primary': user.role === 'Admin', 'label-info': user.role === 'Moderator', 'label-default': user.role === 'User'}">
+                  {{ user.role }}
+                </span>
+              </td>
+              <td>
+                <status-label status="{{ user.status }}"></status-label>
+              </td>
+              <td>
+                <button class="btn btn-xs btn-info" title="View User">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn btn-xs btn-warning" title="Edit User">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-xs btn-danger" ng-click="deleteUser(user)" title="Delete User">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="dataTables_info" role="status" aria-live="polite">
+              Showing {{ users.length }} entries
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers">
+              <ul class="pagination">
+                <li class="paginate_button previous disabled">
+                  <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                </li>
+                <li class="paginate_button active">
+                  <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button next disabled">
+                  <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addUserModalLabel">Add New User</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="userName">Name</label>
+            <input type="text" class="form-control" id="userName" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="userEmail">Email</label>
+            <input type="email" class="form-control" id="userEmail" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="userRole">Role</label>
+            <select class="form-control" id="userRole">
+              <option>User</option>
+              <option>Moderator</option>
+              <option>Admin</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal">
+      <i class="fa fa-plus"></i> Add New User
+    </button>
+    <button type="button" class="btn btn-primary">
+      <i class="fa fa-download"></i> Export Users
+    </button>
+  </div>
+</div>

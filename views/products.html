@@ -1,0 +1,205 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Products Management</h3>
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search products...">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="product in products">
+              <td>{{ product.id }}</td>
+              <td>{{ product.name }}</td>
+              <td>
+                <span class="label label-info">{{ product.category }}</span>
+              </td>
+              <td>{{ product.price }}</td>
+              <td>
+                <span ng-class="{'text-danger': product.stock < 10, 'text-warning': product.stock >= 10 && product.stock < 50, 'text-success': product.stock >= 50}">
+                  {{ product.stock }}
+                </span>
+              </td>
+              <td>
+                <span class="label" ng-class="getStatusClass(product.status)">
+                  {{ product.status | uppercase }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-xs btn-info" title="View Product">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn btn-xs btn-warning" title="Edit Product">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-xs btn-danger" title="Delete Product">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="dataTables_info" role="status" aria-live="polite">
+              Showing {{ products.length }} entries
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers">
+              <ul class="pagination">
+                <li class="paginate_button previous disabled">
+                  <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                </li>
+                <li class="paginate_button active">
+                  <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li class="paginate_button next disabled">
+                  <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Product Statistics -->
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{ products.length }}</h3>
+        <p>Total Products</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{ (products | filter:{status:'active'}).length }}</h3>
+        <p>Active Products</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-checkmark"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>{{ (products | filter:{status:'low_stock'}).length }}</h3>
+        <p>Low Stock</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-alert"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>{{ (products | filter:{status:'out_of_stock'}).length }}</h3>
+        <p>Out of Stock</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-close"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addProductModalLabel">Add New Product</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select class="form-control" id="productCategory">
+              <option>Electronics</option>
+              <option>Accessories</option>
+              <option>Audio</option>
+              <option>Books</option>
+              <option>Clothing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Price</label>
+            <input type="number" step="0.01" class="form-control" id="productPrice" placeholder="Enter price">
+          </div>
+          <div class="form-group">
+            <label for="productStock">Stock Quantity</label>
+            <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity">
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save Product</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProductModal">
+      <i class="fa fa-plus"></i> Add New Product
+    </button>
+    <button type="button" class="btn btn-primary">
+      <i class="fa fa-download"></i> Export Products
+    </button>
+    <button type="button" class="btn btn-warning">
+      <i class="fa fa-upload"></i> Import Products
+    </button>
+  </div>
+</div>

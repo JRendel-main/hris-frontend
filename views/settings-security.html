@@ -1,0 +1,273 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-danger">
+      <div class="box-header with-border">
+        <h3 class="box-title">Security Settings</h3>
+      </div>
+      <!-- /.box-header -->
+      <form role="form">
+        <div class="box-body">
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="settings.twoFactorAuth">
+                Enable Two-Factor Authentication
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="passwordPolicy">Password Policy</label>
+            <select class="form-control" id="passwordPolicy">
+              <option>Basic (8+ characters)</option>
+              <option>Medium (8+ chars, mixed case, numbers)</option>
+              <option>Strong (12+ chars, mixed case, numbers, symbols)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="loginAttempts">Max Login Attempts</label>
+            <input type="number" class="form-control" id="loginAttempts" value="5" min="3" max="10">
+          </div>
+          <div class="form-group">
+            <label for="lockoutDuration">Account Lockout Duration (minutes)</label>
+            <input type="number" class="form-control" id="lockoutDuration" value="30" min="5" max="1440">
+          </div>
+          <div class="form-group">
+            <label for="sessionTimeout">Session Timeout (minutes)</label>
+            <input type="number" class="form-control" id="sessionTimeout" ng-model="settings.sessionTimeout" min="5" max="480">
+          </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-danger" ng-click="saveSettings()">Save Security Settings</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.box -->
+  </div>
+
+  <div class="col-md-6">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Security Logs</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>User</th>
+                <th>Time</th>
+                <th>IP Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Failed Login</td>
+                <td>john@example.com</td>
+                <td>2025-01-14 10:30:15</td>
+                <td>192.168.1.100</td>
+              </tr>
+              <tr>
+                <td>Password Changed</td>
+                <td>admin@example.com</td>
+                <td>2025-01-14 09:15:22</td>
+                <td>192.168.1.101</td>
+              </tr>
+              <tr>
+                <td>Successful Login</td>
+                <td>admin@example.com</td>
+                <td>2025-01-14 09:00:05</td>
+                <td>192.168.1.101</td>
+              </tr>
+              <tr>
+                <td>Account Locked</td>
+                <td>user@example.com</td>
+                <td>2025-01-13 16:45:30</td>
+                <td>192.168.1.102</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="button" class="btn btn-info">View All Logs</button>
+        <button type="button" class="btn btn-warning">Export Logs</button>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Password Change -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Change Admin Password</h3>
+      </div>
+      <!-- /.box-header -->
+      <form role="form">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password">
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+          </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">
+                Require password change on next login
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary">Change Password</button>
+          <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.box -->
+  </div>
+
+  <div class="col-md-6">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Security Recommendations</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="alert alert-success">
+          <h4><i class="icon fa fa-check"></i> Good Security Practices</h4>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-check text-success"></i> Two-factor authentication is enabled</li>
+            <li><i class="fa fa-check text-success"></i> Strong password policy in place</li>
+            <li><i class="fa fa-check text-success"></i> Account lockout after failed attempts</li>
+          </ul>
+        </div>
+
+        <div class="alert alert-warning">
+          <h4><i class="icon fa fa-warning"></i> Recommendations</h4>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-exclamation-triangle text-warning"></i> Consider enabling SSL certificate</li>
+            <li><i class="fa fa-exclamation-triangle text-warning"></i> Regular security audits recommended</li>
+            <li><i class="fa fa-exclamation-triangle text-warning"></i> Update admin password regularly</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- API Keys and Access -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">API Keys & Access Control</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>API Key</th>
+                <th>Description</th>
+                <th>Permissions</th>
+                <th>Last Used</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>sk_live_********************1234</code></td>
+                <td>Payment Gateway API</td>
+                <td>Read/Write</td>
+                <td>2025-01-14 11:30:00</td>
+                <td><span class="label label-success">Active</span></td>
+                <td>
+                  <button class="btn btn-xs btn-warning">Regenerate</button>
+                  <button class="btn btn-xs btn-danger">Revoke</button>
+                </td>
+              </tr>
+              <tr>
+                <td><code>sk_test_********************5678</code></td>
+                <td>Analytics API</td>
+                <td>Read Only</td>
+                <td>2025-01-13 15:45:00</td>
+                <td><span class="label label-success">Active</span></td>
+                <td>
+                  <button class="btn btn-xs btn-warning">Regenerate</button>
+                  <button class="btn btn-xs btn-danger">Revoke</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addApiKeyModal">
+          <i class="fa fa-plus"></i> Add New API Key
+        </button>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Add API Key Modal -->
+<div class="modal fade" id="addApiKeyModal" tabindex="-1" role="dialog" aria-labelledby="addApiKeyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addApiKeyModalLabel">Add New API Key</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="apiKeyDescription">Description</label>
+            <input type="text" class="form-control" id="apiKeyDescription" placeholder="Enter API key description">
+          </div>
+          <div class="form-group">
+            <label for="apiKeyPermissions">Permissions</label>
+            <select class="form-control" id="apiKeyPermissions">
+              <option>Read Only</option>
+              <option>Read/Write</option>
+              <option>Admin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="apiKeyExpiry">Expiry Date (optional)</label>
+            <input type="date" class="form-control" id="apiKeyExpiry">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Generate API Key</button>
+      </div>
+    </div>
+  </div>
+</div>

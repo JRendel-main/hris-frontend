@@ -1,0 +1,432 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Job Postings</h3>
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search jobs...">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Department</th>
+              <th>Applicants</th>
+              <th>Posted Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="job in jobPostings">
+              <td><strong>{{ job.title }}</strong></td>
+              <td>
+                <span class="label label-primary">{{ job.department }}</span>
+              </td>
+              <td>
+                <span class="badge bg-blue">{{ job.applicants }}</span>
+              </td>
+              <td>{{ job.postedDate }}</td>
+              <td>
+                <status-label status="{{ job.status }}"></status-label>
+              </td>
+              <td>
+                <button class="btn btn-xs btn-info" title="View Applicants">
+                  <i class="fa fa-users"></i>
+                </button>
+                <button class="btn btn-xs btn-warning" title="Edit Job">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-xs btn-danger" title="Close Job">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Recruitment Statistics -->
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{ jobPostings.length }}</h3>
+        <p>Open Positions</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-briefcase"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{ jobPostings.reduce((sum, job) => sum + job.applicants, 0) }}</h3>
+        <p>Total Applicants</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>{{ (jobPostings | filter:{status:'closed'}).length }}</h3>
+        <p>Positions Filled</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-checkmark"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>{{ (applicants | filter:{status:'hired'}).length }}</h3>
+        <p>Successful Hires</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-trophy"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<!-- Applicants and Hiring Pipeline -->
+<div class="row">
+  <div class="col-md-8">
+    <!-- Applicants Table -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Recent Applicants</h3>
+        <div class="box-tools pull-right">
+          <select class="form-control input-sm">
+            <option>All Positions</option>
+            <option>Senior Software Developer</option>
+            <option>HR Coordinator</option>
+            <option>Financial Analyst</option>
+          </select>
+        </div>
+      </div>
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Applied Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="applicant in applicants">
+              <td>{{ applicant.name }}</td>
+              <td>{{ applicant.position }}</td>
+              <td>{{ applicant.appliedDate }}</td>
+              <td>
+                <status-label status="{{ applicant.status }}"></status-label>
+              </td>
+              <td>
+                <button class="btn btn-xs btn-info" title="View Profile">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn btn-xs btn-success" ng-if="applicant.status !== 'hired'" title="Advance">
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-xs btn-danger" title="Reject">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Hiring Pipeline -->
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Hiring Pipeline</h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="info-box bg-aqua">
+              <span class="info-box-icon"><i class="fa fa-inbox"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Applied</span>
+                <span class="info-box-number">25</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="info-box bg-yellow">
+              <span class="info-box-icon"><i class="fa fa-search"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Screening</span>
+                <span class="info-box-number">8</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="info-box bg-blue">
+              <span class="info-box-icon"><i class="fa fa-phone"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Interview</span>
+                <span class="info-box-number">5</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="info-box bg-green">
+              <span class="info-box-icon"><i class="fa fa-check"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Offer</span>
+                <span class="info-box-number">2</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="info-box bg-red">
+              <span class="info-box-icon"><i class="fa fa-user-plus"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Hired</span>
+                <span class="info-box-number">1</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="info-box bg-gray">
+              <span class="info-box-icon"><i class="fa fa-times"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Rejected</span>
+                <span class="info-box-number">9</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <!-- Quick Actions -->
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">Recruitment Actions</h3>
+      </div>
+      <div class="box-body">
+        <button class="btn btn-app btn-block" data-toggle="modal" data-target="#postJobModal">
+          <i class="fa fa-plus"></i> Post New Job
+        </button>
+        <button class="btn btn-app btn-block">
+          <i class="fa fa-search"></i> Search Candidates
+        </button>
+        <button class="btn btn-app btn-block">
+          <i class="fa fa-calendar"></i> Schedule Interviews
+        </button>
+        <button class="btn btn-app btn-block">
+          <i class="fa fa-envelope"></i> Send Offers
+        </button>
+        <button class="btn btn-app btn-block">
+          <i class="fa fa-bar-chart"></i> Analytics
+        </button>
+        <button class="btn btn-app btn-block">
+          <i class="fa fa-cog"></i> Settings
+        </button>
+      </div>
+    </div>
+
+    <!-- Top Skills -->
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Top Skills in Demand</h3>
+      </div>
+      <div class="box-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            <i class="fa fa-code text-blue"></i> JavaScript
+            <span class="badge">85%</span>
+          </a>
+          <a href="#" class="list-group-item">
+            <i class="fa fa-database text-green"></i> SQL
+            <span class="badge">72%</span>
+          </a>
+          <a href="#" class="list-group-item">
+            <i class="fa fa-cloud text-yellow"></i> AWS
+            <span class="badge">68%</span>
+          </a>
+          <a href="#" class="list-group-item">
+            <i class="fa fa-users text-red"></i> Team Leadership
+            <span class="badge">55%</span>
+          </a>
+          <a href="#" class="list-group-item">
+            <i class="fa fa-line-chart text-purple"></i> Data Analysis
+            <span class="badge">48%</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Hires -->
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title">Recent Hires</h3>
+      </div>
+      <div class="box-body">
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <b>Emily Chen</b>
+            <a class="pull-right">Financial Analyst</a>
+            <div class="progress progress-xs">
+              <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+            </div>
+            <span class="text-muted">Onboarding Complete</span>
+          </li>
+          <li class="list-group-item">
+            <b>Mike Johnson</b>
+            <a class="pull-right">HR Coordinator</a>
+            <div class="progress progress-xs">
+              <div class="progress-bar progress-bar-warning" style="width: 60%"></div>
+            </div>
+            <span class="text-muted">Onboarding in Progress</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Post Job Modal -->
+<div class="modal fade" id="postJobModal" tabindex="-1" role="dialog" aria-labelledby="postJobModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="postJobModalLabel">Post New Job Opening</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="jobTitle">Job Title</label>
+                <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title">
+              </div>
+              <div class="form-group">
+                <label for="jobDepartment">Department</label>
+                <select class="form-control" id="jobDepartment">
+                  <option>Information Technology</option>
+                  <option>Human Resources</option>
+                  <option>Finance</option>
+                  <option>Marketing</option>
+                  <option>Operations</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="jobType">Job Type</label>
+                <select class="form-control" id="jobType">
+                  <option>Full-time</option>
+                  <option>Part-time</option>
+                  <option>Contract</option>
+                  <option>Internship</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="jobLocation">Location</label>
+                <input type="text" class="form-control" id="jobLocation" placeholder="Enter job location">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="salaryRange">Salary Range</label>
+                <input type="text" class="form-control" id="salaryRange" placeholder="e.g., $50,000 - $70,000">
+              </div>
+              <div class="form-group">
+                <label for="experienceLevel">Experience Level</label>
+                <select class="form-control" id="experienceLevel">
+                  <option>Entry Level</option>
+                  <option>Mid Level</option>
+                  <option>Senior Level</option>
+                  <option>Executive</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="applicationDeadline">Application Deadline</label>
+                <input type="date" class="form-control" id="applicationDeadline">
+              </div>
+              <div class="form-group">
+                <label for="jobStatus">Status</label>
+                <select class="form-control" id="jobStatus">
+                  <option>Draft</option>
+                  <option>Published</option>
+                  <option>Closed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="jobDescription">Job Description</label>
+            <textarea class="form-control" id="jobDescription" rows="4" placeholder="Enter detailed job description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="jobRequirements">Requirements</label>
+            <textarea class="form-control" id="jobRequirements" rows="3" placeholder="Enter job requirements and qualifications"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="jobBenefits">Benefits</label>
+            <textarea class="form-control" id="jobBenefits" rows="2" placeholder="Enter benefits and perks"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Post Job</button>
+        <button type="button" class="btn btn-warning">Save as Draft</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#postJobModal">
+      <i class="fa fa-plus"></i> Post New Job
+    </button>
+    <button type="button" class="btn btn-primary">
+      <i class="fa fa-users"></i> Browse Candidates
+    </button>
+    <button type="button" class="btn btn-info">
+      <i class="fa fa-bar-chart"></i> Recruitment Analytics
+    </button>
+    <button type="button" class="btn btn-warning">
+      <i class="fa fa-envelope"></i> Email Templates
+    </button>
+    <button type="button" class="btn btn-danger">
+      <i class="fa fa-file-pdf-o"></i> Generate Reports
+    </button>
+  </div>
+</div>

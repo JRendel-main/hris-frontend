@@ -1,0 +1,267 @@
+<!-- Small boxes (Stat box) -->
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{ stats.totalEmployees }}</h3>
+        <p>Total Employees</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a href="#/employees" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{ stats.activeEmployees }}</h3>
+        <p>Active Employees</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-checkmark"></i>
+      </div>
+      <a href="#/attendance" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>{{ stats.onLeave }}</h3>
+        <p>On Leave</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-calendar"></i>
+      </div>
+      <a href="#/leave" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>{{ stats.newHires }}</h3>
+        <p>New Hires (This Month)</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-stalker"></i>
+      </div>
+      <a href="#/recruitment" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>
+<!-- /.row -->
+
+<!-- Main row -->
+<div class="row">
+  <!-- Left col -->
+  <section class="col-lg-7 connectedSortable">
+    <!-- Custom tabs (Charts with tabs)-->
+    <div class="nav-tabs-custom">
+      <!-- Tabs within a box -->
+      <ul class="nav nav-tabs pull-right">
+        <li class="active"><a href="#headcount-chart" data-toggle="tab">Headcount</a></li>
+        <li><a href="#department-chart" data-toggle="tab">Departments</a></li>
+        <li class="pull-left header"><i class="fa fa-users"></i> HR Analytics</li>
+      </ul>
+      <div class="tab-content no-padding">
+        <!-- Employee Headcount Chart -->
+        <div class="chart tab-pane active" id="headcount-chart" style="position: relative; height: 300px;">
+          <canvas id="headcountChart" width="400" height="300"></canvas>
+        </div>
+        <div class="chart tab-pane" id="department-chart" style="position: relative; height: 300px;">
+          <canvas id="departmentChart" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- /.nav-tabs-custom -->
+
+    <!-- Chat box -->
+    <div class="box box-success">
+      <div class="box-header">
+        <i class="fa fa-comments-o"></i>
+        <h3 class="box-title">Chat</h3>
+        <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
+          <div class="btn-group" data-toggle="btn-toggle">
+            <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="box-body chat" id="chat-box">
+        <!-- chat item -->
+        <div class="item">
+          <img src="img/user4-128x128.jpg" alt="user image" class="online">
+          <p class="message">
+            <a href="#" class="name">
+              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+              Mike Doe
+            </a>
+            I would love to.
+          </p>
+        </div>
+        <!-- /.item -->
+        <!-- chat item -->
+        <div class="item">
+          <img src="img/user3-128x128.jpg" alt="user image" class="offline">
+          <p class="message">
+            <a href="#" class="name">
+              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
+              Alexander Pierce
+            </a>
+            I would love to.
+          </p>
+        </div>
+        <!-- /.item -->
+        <!-- chat item -->
+        <div class="item">
+          <img src="img/user2-160x160.jpg" alt="user image" class="offline">
+          <p class="message">
+            <a href="#" class="name">
+              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
+              Susan Doe
+            </a>
+            I would love to.
+          </p>
+        </div>
+        <!-- /.item -->
+      </div>
+      <!-- /.chat -->
+      <div class="box-footer">
+        <div class="input-group">
+          <input class="form-control" placeholder="Type message...">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.box (chat box) -->
+  </section>
+  <!-- /.Left col -->
+
+  <!-- right col (We are only adding the ID to make the widgets sortable)-->
+  <section class="col-lg-5 connectedSortable">
+    <!-- Upcoming Events -->
+    <div class="box box-solid bg-light-blue-gradient">
+      <div class="box-header">
+        <!-- tools box -->
+        <div class="pull-right box-tools">
+          <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range">
+            <i class="fa fa-calendar"></i></button>
+          <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="tooltip" title="Add Event" style="margin-right: 5px;">
+            <i class="fa fa-plus"></i></button>
+        </div>
+        <!-- /. tools -->
+
+        <i class="fa fa-calendar"></i>
+        <h3 class="box-title">
+          Upcoming Events
+        </h3>
+      </div>
+      <div class="box-body">
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item" ng-repeat="event in upcomingEvents">
+            <b>{{ event.title }}</b>
+            <a class="pull-right">{{ event.date }}</a>
+            <div class="progress progress-xs">
+              <div class="progress-bar progress-bar-aqua" style="width: 40%"></div>
+            </div>
+            <span class="badge bg-blue">{{ event.type }}</span>
+          </li>
+        </ul>
+      </div>
+      <!-- /.box-body-->
+      <div class="box-footer no-border">
+        <a href="#/leave" class="btn btn-sm btn-default">View Calendar</a>
+        <a href="#/recruitment" class="btn btn-sm btn-primary pull-right">Add Event</a>
+      </div>
+    </div>
+    <!-- /.box -->
+
+    <!-- Quick Actions -->
+    <div class="box box-solid bg-teal-gradient">
+      <div class="box-header">
+        <i class="fa fa-bolt"></i>
+        <h3 class="box-title">Quick Actions</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <a href="#/employees" class="btn btn-app">
+          <i class="fa fa-users"></i> Add Employee
+        </a>
+        <a href="#/leave" class="btn btn-app">
+          <i class="fa fa-calendar"></i> Request Leave
+        </a>
+        <a href="#/recruitment" class="btn btn-app">
+          <i class="fa fa-user-plus"></i> Post Job
+        </a>
+        <a href="#/payroll" class="btn btn-app">
+          <i class="fa fa-money"></i> Process Payroll
+        </a>
+        <a href="#/reports" class="btn btn-app">
+          <i class="fa fa-bar-chart"></i> Generate Report
+        </a>
+        <a href="#/attendance" class="btn btn-app">
+          <i class="fa fa-clock-o"></i> Check Attendance
+        </a>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </section>
+  <!-- right col -->
+</div>
+<!-- /.row (main row) -->
+
+<!-- Recent Activities -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Recent HR Activities</h3>
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search activities...">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>Employee</th>
+            <th>Activity</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <tr ng-repeat="activity in recentActivities">
+            <td>{{ activity.employee }}</td>
+            <td>{{ activity.action }}</td>
+            <td>{{ activity.time }}</td>
+            <td><status-label status="{{ activity.status }}"></status-label></td>
+            <td>
+              <button class="btn btn-xs btn-info">View Details</button>
+              <button class="btn btn-xs btn-warning">Edit</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

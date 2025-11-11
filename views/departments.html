@@ -1,0 +1,218 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Department Management</h3>
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search departments...">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Department Name</th>
+              <th>Head</th>
+              <th>Employees</th>
+              <th>Budget</th>
+              <th>Utilization</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="department in departments">
+              <td>{{ department.id }}</td>
+              <td>
+                <strong>{{ department.name }}</strong>
+              </td>
+              <td>{{ department.head }}</td>
+              <td>
+                <span class="badge bg-blue">{{ department.employees }}</span>
+              </td>
+              <td>${{ department.budget.toLocaleString() }}</td>
+              <td>
+                <div class="progress progress-xs">
+                  <div class="progress-bar progress-bar-aqua" style="width: 70%"></div>
+                </div>
+                <span class="text-muted">70%</span>
+              </td>
+              <td>
+                <button class="btn btn-xs btn-info" title="View Department">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn btn-xs btn-warning" title="Edit Department">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-xs btn-success" title="Add Employee">
+                  <i class="fa fa-user-plus"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Department Statistics -->
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{ departments.length }}</h3>
+        <p>Total Departments</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-home"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{ departments.reduce((sum, dept) => sum + dept.employees, 0) }}</h3>
+        <p>Total Employees</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-stalker"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>${{ departments.reduce((sum, dept) => sum + dept.budget, 0).toLocaleString() }}</h3>
+        <p>Total Budget</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-cash"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>{{ (departments.reduce((sum, dept) => sum + dept.employees, 0) / departments.length).toFixed(1) }}</h3>
+        <p>Avg Employees/Dept</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <div class="small-box-footer">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<!-- Department Details Cards -->
+<div class="row">
+  <div class="col-md-6" ng-repeat="department in departments">
+    <div class="box box-widget widget-user">
+      <div class="widget-user-header bg-aqua-active">
+        <h3 class="widget-user-username">{{ department.name }}</h3>
+        <h5 class="widget-user-desc">Department Head: {{ department.head }}</h5>
+      </div>
+      <div class="widget-user-image">
+        <img class="img-circle" src="img/user2-160x160.jpg" alt="Department Head">
+      </div>
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">{{ department.employees }}</h5>
+              <span class="description-text">EMPLOYEES</span>
+            </div>
+          </div>
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">${{ (department.budget / 1000).toFixed(0) }}K</h5>
+              <span class="description-text">BUDGET</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="description-block">
+              <h5 class="description-header">85%</h5>
+              <span class="description-text">UTILIZATION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Department Modal -->
+<div class="modal fade" id="addDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="addDepartmentModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addDepartmentModalLabel">Add New Department</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="departmentName">Department Name</label>
+            <input type="text" class="form-control" id="departmentName" placeholder="Enter department name">
+          </div>
+          <div class="form-group">
+            <label for="departmentHead">Department Head</label>
+            <select class="form-control" id="departmentHead">
+              <option>Select Department Head</option>
+              <option>John Doe</option>
+              <option>Jane Smith</option>
+              <option>Bob Johnson</option>
+              <option>Alice Brown</option>
+              <option>Charlie Wilson</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="departmentBudget">Annual Budget</label>
+            <input type="number" class="form-control" id="departmentBudget" placeholder="Enter annual budget">
+          </div>
+          <div class="form-group">
+            <label for="departmentDescription">Description</label>
+            <textarea class="form-control" id="departmentDescription" rows="3" placeholder="Enter department description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="departmentLocation">Location</label>
+            <input type="text" class="form-control" id="departmentLocation" placeholder="Enter department location">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save Department</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div class="row">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addDepartmentModal">
+      <i class="fa fa-plus"></i> Add New Department
+    </button>
+    <button type="button" class="btn btn-primary">
+      <i class="fa fa-sitemap"></i> View Organization Chart
+    </button>
+    <button type="button" class="btn btn-info">
+      <i class="fa fa-bar-chart"></i> Department Analytics
+    </button>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">General Settings</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form role="form">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="siteName">Site Name</label>
+            <input type="text" class="form-control" id="siteName" ng-model="settings.siteName" placeholder="Enter site name">
+          </div>
+          <div class="form-group">
+            <label for="siteDescription">Site Description</label>
+            <textarea class="form-control" id="siteDescription" ng-model="settings.siteDescription" rows="3" placeholder="Enter site description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="siteUrl">Site URL</label>
+            <input type="url" class="form-control" id="siteUrl" placeholder="https://example.com">
+          </div>
+          <div class="form-group">
+            <label for="adminEmail">Admin Email</label>
+            <input type="email" class="form-control" id="adminEmail" placeholder="admin@example.com">
+          </div>
+          <div class="form-group">
+            <label for="timezone">Timezone</label>
+            <select class="form-control" id="timezone">
+              <option>UTC</option>
+              <option>EST</option>
+              <option>PST</option>
+              <option>CST</option>
+              <option>Asia/Singapore</option>
+              <option>Europe/London</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="language">Default Language</label>
+            <select class="form-control" id="language">
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>German</option>
+              <option>Chinese</option>
+            </select>
+          </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary" ng-click="saveSettings()">Save Changes</button>
+          <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.box -->
+  </div>
+
+  <div class="col-md-6">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Notification Settings</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="settings.emailNotifications">
+              Email Notifications
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+              Push Notifications
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+              SMS Notifications
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+              Weekly Reports
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+              Security Alerts
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Maintenance Settings</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="form-group">
+          <label for="maintenanceMode">Maintenance Mode</label>
+          <select class="form-control" id="maintenanceMode">
+            <option>Disabled</option>
+            <option>Enabled</option>
+            <option>Scheduled</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="backupFrequency">Backup Frequency</label>
+          <select class="form-control" id="backupFrequency">
+            <option>Daily</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sessionTimeout">Session Timeout (minutes)</label>
+          <input type="number" class="form-control" id="sessionTimeout" ng-model="settings.sessionTimeout" min="5" max="480">
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- Logo and Branding -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">Logo and Branding</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="siteLogo">Site Logo</label>
+              <input type="file" id="siteLogo" accept="image/*">
+              <p class="help-block">Upload a PNG, JPG, or GIF image (max 2MB)</p>
+            </div>
+            <div class="form-group">
+              <label for="favicon">Favicon</label>
+              <input type="file" id="favicon" accept="image/*">
+              <p class="help-block">Upload a 16x16 or 32x32 ICO/PNG image</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Current Logo Preview</label>
+              <div class="text-center">
+                <img src="img/user2-160x160.jpg" alt="Logo Preview" class="img-thumbnail" style="max-width: 150px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="button" class="btn btn-primary">Upload Logo</button>
+        <button type="button" class="btn btn-warning">Reset to Default</button>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
