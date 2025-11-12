@@ -1,0 +1,84 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#"><b>HRIS</b> Admin</a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+
+        <form name="registerForm" ng-submit="register()" novalidate>
+            <div class="form-group has-feedback" ng-class="{'has-error': registerForm.name.$invalid && registerForm.name.$touched}">
+                <input type="text" class="form-control" placeholder="Full name" ng-model="user.name" name="name" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="help-block" ng-show="registerForm.name.$invalid && registerForm.name.$touched">Full name is required</span>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-error': registerForm.email.$invalid && registerForm.email.$touched}">
+                <input type="email" class="form-control" placeholder="Email" ng-model="user.email" name="email" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span class="help-block" ng-show="registerForm.email.$invalid && registerForm.email.$touched">
+                    <span ng-show="registerForm.email.$error.required">Email is required</span>
+                    <span ng-show="registerForm.email.$error.email">Enter a valid email</span>
+                </span>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-error': registerForm.username.$invalid && registerForm.username.$touched}">
+                <input type="text" class="form-control" placeholder="Username" ng-model="user.username" name="username" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="help-block" ng-show="registerForm.username.$invalid && registerForm.username.$touched">Username is required</span>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-error': registerForm.password.$invalid && registerForm.password.$touched}">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password" name="password" required minlength="6">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="help-block" ng-show="registerForm.password.$invalid && registerForm.password.$touched">
+                    <span ng-show="registerForm.password.$error.required">Password is required</span>
+                    <span ng-show="registerForm.password.$error.minlength">Password must be at least 6 characters</span>
+                </span>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-error': registerForm.confirmPassword.$invalid && registerForm.confirmPassword.$touched || user.password !== user.confirmPassword && registerForm.confirmPassword.$touched}">
+                <input type="password" class="form-control" placeholder="Retype password" ng-model="user.confirmPassword" name="confirmPassword" required>
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <span class="help-block" ng-show="registerForm.confirmPassword.$invalid && registerForm.confirmPassword.$touched || user.password !== user.confirmPassword && registerForm.confirmPassword.$touched">
+                    <span ng-show="registerForm.confirmPassword.$error.required">Please retype password</span>
+                    <span ng-show="user.password !== user.confirmPassword">Passwords do not match</span>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" required> I agree to the <a href="#">terms</a>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" ng-disabled="registerForm.$invalid || user.password !== user.confirmPassword">Register</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <div class="alert alert-danger" ng-show="error">
+            <strong>Error:</strong> {{error}}
+        </div>
+
+        <div class="alert alert-success" ng-show="success">
+            <strong>Success:</strong> {{success}}
+        </div>
+
+        <a ng-click="goToLogin()" class="text-center" style="cursor: pointer;">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- iCheck -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
