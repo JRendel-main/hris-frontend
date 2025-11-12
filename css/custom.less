@@ -1,0 +1,384 @@
+// Custom styles for Admin Dashboard using LessCSS with Multiple Themes
+
+// Base Variables
+@hover-bg: #f5f5f5;
+@border-radius: 3px;
+@sidebar-scrollbar-width: 6px;
+@sidebar-scrollbar-track: #f1f1f1;
+@sidebar-scrollbar-thumb: #888;
+@sidebar-scrollbar-thumb-hover: #555;
+@spinner-size: 20px;
+@spinner-border: 3px;
+@chart-height: 300px;
+
+// Default Theme (Blue)
+@primary-color: #3c8dbc;
+@secondary-color: #367fa9;
+@success-color: #00a65a;
+@warning-color: #f39c12;
+@info-color: #00c0ef;
+@danger-color: #dd4b39;
+@inactive-color: #999;
+@text-color: #333;
+@bg-color: #fff;
+
+// Green Theme
+.theme-green {
+    @primary-color: #00a65a;
+    @secondary-color: #008d4c;
+    @success-color: #00a65a;
+    @warning-color: #f39c12;
+    @info-color: #00c0ef;
+    @danger-color: #dd4b39;
+}
+
+// Purple Theme
+.theme-purple {
+    @primary-color: #605ca8;
+    @secondary-color: #555299;
+    @success-color: #00a65a;
+    @warning-color: #f39c12;
+    @info-color: #00c0ef;
+    @danger-color: #dd4b39;
+}
+
+// Red Theme
+.theme-red {
+    @primary-color: #dd4b39;
+    @secondary-color: #d73925;
+    @success-color: #00a65a;
+    @warning-color: #f39c12;
+    @info-color: #00c0ef;
+    @danger-color: #dd4b39;
+}
+
+// Dark Theme
+.theme-dark {
+    @primary-color: #2c3e50;
+    @secondary-color: #34495e;
+    @success-color: #27ae60;
+    @warning-color: #f39c12;
+    @info-color: #3498db;
+    @danger-color: #e74c3c;
+    @inactive-color: #7f8c8d;
+    @text-color: #ecf0f1;
+    @bg-color: #2c3e50;
+    @hover-bg: #34495e;
+}
+
+// Light Theme
+.theme-light {
+    @primary-color: #95a5a6;
+    @secondary-color: #7f8c8d;
+    @success-color: #27ae60;
+    @warning-color: #f39c12;
+    @info-color: #3498db;
+    @danger-color: #e74c3c;
+    @inactive-color: #bdc3c7;
+    @text-color: #2c3e50;
+    @bg-color: #ecf0f1;
+    @hover-bg: #f8f9fa;
+}
+
+// Mixins
+.border-radius(@radius) {
+    border-radius: @radius;
+}
+
+.box-shadow(@shadow) {
+    box-shadow: @shadow;
+}
+
+.transition(@property: all, @duration: 0.3s, @ease: ease) {
+    transition: @property @duration @ease;
+}
+
+.animation(@name, @duration: 1s, @timing: linear, @iteration: infinite) {
+    animation: @name @duration @timing @iteration;
+}
+
+// Override some AdminLTE styles for better AngularJS integration
+.skin-blue .sidebar-menu > li.active > a {
+    border-left-color: @primary-color;
+}
+
+// Custom status labels
+.status-active {
+    background-color: @success-color;
+}
+
+.status-inactive {
+    background-color: @inactive-color;
+}
+
+.status-pending {
+    background-color: @warning-color;
+}
+
+.status-completed {
+    background-color: @info-color;
+}
+
+// Dashboard widgets enhancements
+.small-box .icon {
+    top: -10px;
+    right: 10px;
+}
+
+// Table improvements
+.table-hover > tbody > tr:hover {
+    background-color: @hover-bg;
+}
+
+// Form enhancements
+.form-control:focus {
+    border-color: @primary-color;
+    .box-shadow(none);
+}
+
+// Button enhancements
+.btn {
+    .border-radius(@border-radius);
+}
+
+.btn-primary {
+    background-color: @primary-color;
+    border-color: @secondary-color;
+
+    &:hover {
+        background-color: @secondary-color;
+        border-color: darken(@secondary-color, 10%);
+    }
+}
+
+// Modal enhancements
+.modal-content {
+    .border-radius(5px);
+}
+
+// Progress bars
+.progress-bar {
+    .border-radius(@border-radius);
+}
+
+// Alert enhancements
+.alert {
+    .border-radius(@border-radius);
+}
+
+// Custom animations
+.fade-in {
+    .animation(fadeIn, 0.5s, ease-in);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+    .main-header .logo {
+        width: 100%;
+    }
+
+    .sidebar-toggle {
+        float: left;
+    }
+
+    .navbar-custom-menu {
+        float: right;
+    }
+}
+
+// Chart containers
+.chart-container {
+    position: relative;
+    height: @chart-height;
+    width: 100%;
+}
+
+// Custom scrollbar
+.sidebar {
+    &::-webkit-scrollbar {
+        width: @sidebar-scrollbar-width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @sidebar-scrollbar-track;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: @sidebar-scrollbar-thumb;
+        .border-radius(@border-radius);
+
+        &:hover {
+            background: @sidebar-scrollbar-thumb-hover;
+        }
+    }
+}
+
+// Loading spinner
+.spinner {
+    display: inline-block;
+    width: @spinner-size;
+    height: @spinner-size;
+    border: @spinner-border solid #f3f3f3;
+    border-top: @spinner-border solid #3498db;
+    .border-radius(50%);
+    .animation(spin, 1s, linear, infinite);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Custom tooltips
+.tooltip-inner {
+    background-color: @primary-color;
+}
+
+.tooltip {
+    &.top .tooltip-arrow {
+        border-top-color: @primary-color;
+    }
+
+    &.right .tooltip-arrow {
+        border-right-color: @primary-color;
+    }
+
+    &.bottom .tooltip-arrow {
+        border-bottom-color: @primary-color;
+    }
+
+    &.left .tooltip-arrow {
+        border-left-color: @primary-color;
+    }
+}
+
+// Theme Application Classes
+.theme-green,
+.theme-purple,
+.theme-red,
+.theme-dark,
+.theme-light {
+    // Apply theme colors to buttons
+    .btn-primary {
+        background-color: @primary-color;
+        border-color: @secondary-color;
+
+        &:hover {
+            background-color: @secondary-color;
+            border-color: darken(@secondary-color, 10%);
+        }
+    }
+
+    // Apply theme colors to status labels
+    .status-active {
+        background-color: @success-color;
+    }
+
+    .status-inactive {
+        background-color: @inactive-color;
+    }
+
+    .status-pending {
+        background-color: @warning-color;
+    }
+
+    .status-completed {
+        background-color: @info-color;
+    }
+
+    // Apply theme colors to form elements
+    .form-control:focus {
+        border-color: @primary-color;
+    }
+
+    // Apply theme colors to tooltips
+    .tooltip-inner {
+        background-color: @primary-color;
+    }
+
+    .tooltip {
+        &.top .tooltip-arrow {
+            border-top-color: @primary-color;
+        }
+
+        &.right .tooltip-arrow {
+            border-right-color: @primary-color;
+        }
+
+        &.bottom .tooltip-arrow {
+            border-bottom-color: @primary-color;
+        }
+
+        &.left .tooltip-arrow {
+            border-left-color: @primary-color;
+        }
+    }
+
+    // Apply theme colors to sidebar active state
+    .skin-blue .sidebar-menu > li.active > a {
+        border-left-color: @primary-color;
+    }
+}
+
+// Dark theme specific overrides
+.theme-dark {
+    body {
+        background-color: @bg-color;
+        color: @text-color;
+    }
+
+    .content-wrapper {
+        background-color: @bg-color;
+        color: @text-color;
+    }
+
+    .box {
+        background-color: lighten(@bg-color, 5%);
+        border-color: lighten(@bg-color, 10%);
+        color: @text-color;
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: @hover-bg;
+    }
+}
+
+// Light theme specific overrides
+.theme-light {
+    body {
+        background-color: @bg-color;
+        color: @text-color;
+    }
+
+    .content-wrapper {
+        background-color: @bg-color;
+        color: @text-color;
+    }
+
+    .box {
+        background-color: darken(@bg-color, 2%);
+        color: @text-color;
+    }
+}
+
+// Print styles
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .sidebar,
+    .main-header,
+    .main-footer {
+        display: none !important;
+    }
+
+    .content-wrapper {
+        margin-left: 0 !important;
+    }
+}
